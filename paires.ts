@@ -40,10 +40,12 @@ class Card {
         this._found = value;
     }
 }
+
 class Game {
     static _pairFound = 0;
     static _activeCardsCount = 0;
-    static _currentCards = [];
+    
+    static _currentCards = []; 
     static clickOnCard(event): void {   // Click handler
         let cardId = event.target.id;
         let selectedCard = arr[cardId-1]; // Select the card the player just clicked on
@@ -59,11 +61,21 @@ class Game {
             Game._currentCards.push(selectedCard);
             if(Game._activeCardsCount > 1){
                 if( Game.areEquals(Game._currentCards[0], Game._currentCards[1])){ // If both cards are equals
-                    Game._activeCardsCount = 0;
-                    Game._currentCards = [];
+                    console.log("trouvé");
+                    Game._activeCardsCount = 0;                   
                     Game._currentCards[0].found = true;
                     Game._currentCards[1].found = true;
+                    Game._currentCards = [];
                     Game._pairFound++;
+                }
+                else {
+                    Game._activeCardsCount = 0;    
+                    setTimeout(() => {
+                        console.log("Cards : " + Game._currentCards);
+                        Game._currentCards[0].hide();
+                        Game._currentCards[1].hide();
+                    }, 1000);           
+                    Game._currentCards = [];
                 }
             }
         }

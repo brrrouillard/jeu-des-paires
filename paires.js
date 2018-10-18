@@ -51,11 +51,21 @@ class Game {
             Game._currentCards.push(selectedCard);
             if (Game._activeCardsCount > 1) {
                 if (Game.areEquals(Game._currentCards[0], Game._currentCards[1])) { // If both cards are equals
+                    console.log("trouvé");
                     Game._activeCardsCount = 0;
-                    Game._currentCards = [];
                     Game._currentCards[0].found = true;
                     Game._currentCards[1].found = true;
+                    Game._currentCards = [];
                     Game._pairFound++;
+                }
+                else {
+                    Game._activeCardsCount = 0;
+                    setTimeout(() => {
+                        console.log("Cards : " + Game._currentCards);
+                        Game._currentCards[0].hide();
+                        Game._currentCards[1].hide();
+                    }, 1000);
+                    Game._currentCards = [];
                 }
             }
         }
