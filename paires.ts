@@ -59,6 +59,8 @@ class Game {
             Game._currentCards.push(selectedCard);
             if(Game._activeCardsCount > 1){
                 if( Game.areEquals(Game._currentCards[0], Game._currentCards[1])){ // If both cards are equals
+                    Game._activeCardsCount = 0;
+                    Game._currentCards = [];
                     Game._currentCards[0].found = true;
                     Game._currentCards[1].found = true;
                     Game._pairFound++;
@@ -75,9 +77,13 @@ class Game {
         document.getElementById("pair-found").innerHTML = "Pair founds : " + Game._pairFound;
     }
 }
+let baseArr = ["anehihan.jpg", "anehihan.jpg", "chatminou.jpg", "chatminou.jpg", "chientoutou.jpg", "chientoutou.jpg", "lamacrachat.jpg", "lamacrachat.jpg", "lapinscrottes.jpg", "lapinscrottes.jpg", "lionnegraou.jpg", "lionnegraou.jpg", "oursbaby.jpg", "oursbaby.jpg"];
 let arr = []; // Arrays of 14 items containing each card
 for (let i = 1; i <= 14; i++){
-    let id:string = i.toString();
-    arr.push(new Card(document.getElementById(id),"anehihan.jpg"));
+    let id = i.toString();
+    let randImg = Math.floor(Math.random() * baseArr.length);
+    let randImgSrc = baseArr[randImg];
+    baseArr.splice(randImg, 1);
+    arr.push(new Card(document.getElementById(id),randImgSrc));
     arr[i-1]._domElement.addEventListener("click", Game.clickOnCard); // Hide on click
 }
