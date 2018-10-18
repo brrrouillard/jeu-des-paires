@@ -1,0 +1,34 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 10fr 80fr 10fr;
+    grid-template-rows: 10fr 80fr 10fr;
+}
+
+.title {
+    grid-column: 2 / span 1;
+    grid-row : 1 span / 1;
+    text-align: center;
+}
+
+.container {
+    background-color: rgb(182, 175, 175);
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    display: grid;
+    grid-template-columns: repeat(1fr, 7);
+    grid-template-rows: 50fr 50fr;
+}
+
+.card {
+    background-color: grey; 
+    padding: 1vh;
+    margin: 0.5vh;
+}
+
+.top {
+    grid-row: 1 / span 1;
+}
