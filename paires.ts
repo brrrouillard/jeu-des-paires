@@ -46,7 +46,7 @@ class Game {
     static _activeCardsCount = 0;
     
     static _currentCards = []; 
-    static clickOnCard(event): void {   // Click handler
+    static clickOnCard(event) {   // Click handler
         let cardId = event.target.id;
         let selectedCard = arr[cardId-1]; // Select the card the player just clicked on
         console.log(selectedCard);
@@ -69,7 +69,8 @@ class Game {
                     Game._pairFound++;
                 }
                 else {
-                    Game._activeCardsCount = 0;    
+                    Game._activeCardsCount = 0;
+                    console.log(Game._currentCards);  
                     setTimeout(() => {
                         console.log("Cards : " + Game._currentCards);
                         Game._currentCards[0].hide();
@@ -95,7 +96,7 @@ for (let i = 1; i <= 14; i++){
     let id = i.toString();
     let randImg = Math.floor(Math.random() * baseArr.length);
     let randImgSrc = baseArr[randImg];
-    baseArr.splice(randImg, 1);
+    baseArr.splice(randImg, 1); // remove the image from the array when it's placed
     arr.push(new Card(document.getElementById(id),randImgSrc));
     arr[i-1]._domElement.addEventListener("click", Game.clickOnCard); // Hide on click
 }
