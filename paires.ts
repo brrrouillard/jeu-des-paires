@@ -50,16 +50,12 @@ class Game {
         let cardId = event.target.id;
         let selectedCard = arr[cardId-1]; // Select the card the player just clicked on
         console.log(selectedCard);
-        if (selectedCard.visible && !selectedCard.found){ // If the card is already shown
-            selectedCard.hide();
-            Game._activeCardsCount--;
-            Game._currentCards.pop();
-        }
-        else if (!selectedCard.visible && Game._activeCardsCount < 2){     
+        console.log(Game._activeCardsCount);
+        if (!selectedCard.visible && Game._activeCardsCount < 2){     
             selectedCard.reveal();
             Game._activeCardsCount++;
             Game._currentCards.push(selectedCard);
-            if(Game._activeCardsCount > 1){
+            if(Game._activeCardsCount == 2){ // If two cards are visible
                 if( Game.areEquals(Game._currentCards[0], Game._currentCards[1])){ // If both cards are equals
                     console.log("trouvé");
                     Game._activeCardsCount = 0;                   
@@ -68,13 +64,17 @@ class Game {
                     Game._currentCards = [];
                     Game._pairFound++;
                 }
-                else {
+                else { // If they are different
+                    console.log("Salut");
                     Game._activeCardsCount = 0;
                     console.log(Game._currentCards);  
+                    let tempCurrentCards = [...Game._currentCards];
+                    console.dir("1:", tempCurrentCards);
                     setTimeout(() => {
-                        console.log("Cards : " + Game._currentCards);
-                        Game._currentCards[0].hide();
-                        Game._currentCards[1].hide();
+                        console.log(Game);
+                        console.log("Cards : " + tempCurrentCards);
+                        tempCurrentCards[0].hide();
+                        tempCurrentCards[1].hide();
                     }, 1000);           
                     Game._currentCards = [];
                 }
@@ -98,5 +98,5 @@ for (let i = 1; i <= 14; i++){
     let randImgSrc = baseArr[randImg];
     baseArr.splice(randImg, 1); // remove the image from the array when it's placed
     arr.push(new Card(document.getElementById(id),randImgSrc));
-    arr[i-1]._domElement.addEventListener("click", Game.clickOnCard); // Hide on click
+    arr[i-1]._domElement.addEventListener("click", Game.clickOnCard); // x
 }
